@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 1
+  category_id: 1
+  description: MyText
+  gl_vendor: 1
+  payment_due_date: 2022-06-27
+  purchaseorder_number: MyString
+  status_id: 1
+  tax_id: 1
+  tax_values: MyText
+  tds: MyText
+  total_amount: 1
+  vendor_id: 1
+  status: MyString
+
+two:
+  amount: 1
+  category_id: 1
+  description: MyText
+  gl_vendor: 1
+  payment_due_date: 2022-06-27
+  purchaseorder_number: MyString
+  status_id: 1
+  tax_id: 1
+  tax_values: MyText
+  tds: MyText
+  total_amount: 1
+  vendor_id: 1
+  status: MyString
