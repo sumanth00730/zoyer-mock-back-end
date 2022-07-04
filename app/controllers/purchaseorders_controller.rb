@@ -1,16 +1,22 @@
 class PurchaseordersController < ApplicationController
+include DashboardConcern
   before_action :set_purchaseorder, only: %i[ show update destroy ]
-
   # GET /purchaseorders
   def index
-    @purchaseorders = Purchaseorder.all
-
-    render json: {"status":true, "message": "General Info", response: @purchaseorders, total_records: @purchaseorders.length}
+    purchase_orders = search_orders(params, Purchaseorder)
+    print params
+    total_records = purchase_orders.count
+    print purchase_orders.count
+    if purchase_orders.present?
+      render json: {status: true, message:"General Info" ,response: purchase_orders,total_records: total_records }
+    else
+      render json: {status: true, message: "Could not have records", response: [], total_records: 0}
+    end
   end
 
   # GET /purchaseorders/1
   def show
-    render json: @purchaseorder
+    render json: {status: true, message:"General Info" ,response: purchase_orders,total_records: 0 }
   end
 
   # POST /purchaseorders
@@ -46,7 +52,7 @@ class PurchaseordersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchaseorder_params
-      params.require(:request_params).require(:purchase_purchaseorder).permit(:amount, :category_id, :description, :gl_vendor, :payment_due_date, :payment_terms, :purchaseorder_date, :purchaseorder_number, :status_id, :tax_id, :tax_values, :tds, :total_amount, :vendor_id)
+      params.require(:request_params).require(:purchase_order).permit(:amount, :category_id, :description, :gl_vendor, :payment_due_date, :payment_terms, :purchaseOrder_date, :purchaseOrder_number, :status_id, :tax_id, :tax_values, :tds, :total_amount, :vendor_id)
     end
 end
 
