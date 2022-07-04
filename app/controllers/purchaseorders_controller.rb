@@ -16,7 +16,7 @@ include DashboardConcern
 
   # GET /purchaseorders/1
   def show
-    render json: {status: true, message:"General Info" ,response: purchase_orders,total_records: 0 }
+    render json: {status: true, message:"General Info" ,response: @purchaseorder, total_records: 0 }
   end
 
   # POST /purchaseorders
