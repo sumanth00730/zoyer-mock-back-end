@@ -16,7 +16,12 @@ include DashboardConcern
 
   # GET /purchaseorders/1
   def show
-    render json: {status: true, message:"General Info" ,response: @purchaseorder, total_records: 0 }
+    purchase_order = Purchaseorder.find(params[:id])
+    if purchase_orders.present?
+      render json: {status: true, message:"General Info" ,response: purchase_order,total_records: total_records }
+    else
+      render json: {status: true, message: "Could not have records", response: [], total_records: 0}
+    end
   end
 
   # POST /purchaseorders
