@@ -1,7 +1,7 @@
 module DashboardConcern
     def search_orders(params, model_name)
      
-        model_name.search()&.order("#{params[:sort_field]}")&.page(page_no)&.per_page(per_page)
+        model_name.search()&.page(page_no)&.per_page(per_page)
     end
   
     def page_no

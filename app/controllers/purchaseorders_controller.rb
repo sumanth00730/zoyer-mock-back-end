@@ -3,7 +3,7 @@ include DashboardConcern
   before_action :set_purchaseorder, only: %i[ show update destroy ]
   # GET /purchaseorders
   def index
-    purchase_orders = search_orders(params, Purchaseorder)
+    purchase_orders = Purchaseorder.all
     print params
     total_records = purchase_orders.count
     print purchase_orders.count
@@ -24,7 +24,7 @@ include DashboardConcern
 
     @purchaseorder = Purchaseorder.new(purchaseorder_params)
     if @purchaseorder.save
-      render json: @purchaseorder, status: :ok, location: @purchaseorder
+      render json: {status: true, message:"Purchase order created" ,response: @purchaseorder}, status: :ok, location: @purchaseorder
     else
       render json: @purchaseorder.errors, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ include DashboardConcern
   # PATCH/PUT /purchaseorders/1
   def update
     if @purchaseorder.update(purchaseorder_params)
-      render json: @purchaseorder
+      render json: {status: true, message:"Purchase order updated" ,response:@purchaseorder}
     else
       render json: @purchaseorder.errors, status: :unprocessable_entity
     end
