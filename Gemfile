@@ -12,6 +12,15 @@ gem 'will_paginate'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 gem "rack-cors"
+gem 'carrierwave-aws'
+
+gem 'carrierwave', '~> 1.0'
+
+gem 'mini_magick'
+
+gem 'aws-sdk-rails'
+
+gem 'figaro'
 #gem "pg"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]

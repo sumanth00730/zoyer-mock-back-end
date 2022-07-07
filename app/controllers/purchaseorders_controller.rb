@@ -1,5 +1,6 @@
 class PurchaseordersController < ApplicationController
 include DashboardConcern
+include PurchaseOrderConcern
   before_action :set_purchaseorder, only: %i[ show update destroy ]
   # GET /purchaseorders
   def index
@@ -40,9 +41,22 @@ include DashboardConcern
   end
 
   # DELETE /purchaseorders/1
+  
+    
   def destroy
-    @purchaseorder.destroy
+    purchase_order = delete_purchase_order(params[:id])
+
+    if purchase_order.present?
+      successful_api_response('purchase order deleted','success')
+    else
+      failed_api_response('could not delete purchase order')
+    end
   end
+
+  rescue_from(ActiveRecord::RecordNotFound) { |exception| no_data_api_response('purchase order not found','could not find the purchase order requested') }
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -52,7 +66,7 @@ include DashboardConcern
 
     # Only allow a list of trusted parameters through.
     def purchaseorder_params
-      params.require(:request_params).require(:purchase_order).permit(:amount, :category_id, :description, :gl_vendor, :payment_due_date, :payment_terms, :purchaseOrder_date, :purchaseOrder_number, :status_id, :tax_id, :tax_values, :tds, :total_amount, :vendor_id)
+      params.require(:request_params).require(:purchase_order).permit(:amount, :category_id, :description, :gl_vendor, :payment_due_date, :payment_terms, :purchaseOrder_date, :purchaseOrder_number, :status_id, :tax_id, :tax_values, :tds, :total_amount, :vendor_id,:star_vendor, {attachments: []})
     end
 end
 
